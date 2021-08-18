@@ -127,8 +127,4 @@ public class SpotifyAccess {
     }
     return null;
   }
-
-  public static void main(String[] args) {
-
-  }
 }
