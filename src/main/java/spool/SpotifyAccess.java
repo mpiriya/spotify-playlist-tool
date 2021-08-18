@@ -1,4 +1,4 @@
-package y;
+package spool;
 
 import com.wrapper.spotify.SpotifyApi;
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;

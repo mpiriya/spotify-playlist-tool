@@ -1,5 +1,5 @@
-package y;
-import y.SpotifyAccess;
+package spool;
+import spool.SpotifyAccess;
 import com.wrapper.spotify.model_objects.specification.PlaylistTrack;
 import com.wrapper.spotify.model_objects.specification.AudioFeatures;
 import java.util.ArrayList;
