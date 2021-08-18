@@ -21,9 +21,21 @@ as well as figures describing trends in
 
 1. In the `src/main/resources` directory, add a `.json` file that contains `client-id` and `client-secret` string objects.
 
-2. TODO
+2. Add the playlist ID in `App.java`
 
 3. Finally, run `mvn clean compile` and then `mvn exec:java -Dexec.mainClass="y.App";`
+
+4. A popup will appear with a radar chart describing the playlist
+
+## Todo
+
+1. Web Server
+
+2. Search artists to see their chart, ability to select an album to see its specific chart
+
+3. Login to see user's playlists (public and private)
+
+4. marketing: GOOGLE ADS for $$
 
 ## Dependencies
 
