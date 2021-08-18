@@ -70,7 +70,7 @@ public class Analysis {
 
     int size = feet.size();
     Double avgSecs = durationSum / size / 1000.0;
-    String dur = "" + (avgSecs.intValue() / 60) + ":" + String.format("%2.2f", (avgSecs % 60));
+    String dur = "" + (avgSecs.intValue() / 60) + ":" + String.format("%02.2f", (avgSecs % 60));
     Integer mostCommonTS = 0;
     Integer appearances = -1;
     for(Map.Entry ts : timeSig.entrySet()) {
@@ -82,11 +82,11 @@ public class Analysis {
 
     HashMap<String, String> toReturn = new HashMap<String, String>();
     
-    toReturn.put("Key", "" + (keySum / size));
-    toReturn.put("Mode", (minor > major) ? "Minor" : (minor < major) ? "Major" : "Equal");
-    toReturn.put("Duration", dur);
-    toReturn.put("Time Signature", mostCommonTS.toString());
-    toReturn.put("Tempo", "" + (tempoSum.intValue() / size));
+    toReturn.put("Key", "" + (keySum / size)); // maybe show as a bar chart
+    toReturn.put("Mode", (minor > major) ? "Minor" : (minor < major) ? "Major" : "Equal"); // pie chart
+    toReturn.put("Duration", dur); // histogram (buckets)
+    toReturn.put("Time Signature", mostCommonTS.toString()); // bar chart
+    toReturn.put("Tempo", "" + (tempoSum.intValue() / size)); // histogram (buckets)
 
     return toReturn;
   }
