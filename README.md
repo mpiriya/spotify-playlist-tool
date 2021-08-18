@@ -23,6 +23,8 @@ as well as figures describing trends in
 
 2. TODO
 
+3. Finally, run `mvn clean compile` and then `mvn exec:java -Dexec.mainClass="y.App";`
+
 ## Dependencies
 
 * JSON

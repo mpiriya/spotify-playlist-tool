@@ -1,5 +1,8 @@
 package y;
 import y.SpotifyAccess;
+import com.wrapper.spotify.model_objects.specification.PlaylistTrack;
+import com.wrapper.spotify.model_objects.specification.AudioFeatures;
+import java.util.ArrayList;
 
 /**
  * Hello world!
@@ -15,7 +18,11 @@ public class App
         // System.out.println("Spotify Client Secret: ");
         // String sec = sc.nextLine();
         SpotifyAccess spotifyaccess = new SpotifyAccess("/client.json");
-        System.out.println(spotifyaccess);
+        spotifyaccess.accessToken();
+
+        ArrayList<String> plids = spotifyaccess.getPlaylistTrackIds("75xfeRCvAy3hhYGfjuOl4S");
+        ArrayList<AudioFeatures> features = spotifyaccess.getAudioFeatures(plids);
+        // System.out.println(spotifyaccess);
 
     }
 }
