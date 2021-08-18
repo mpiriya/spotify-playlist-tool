@@ -9,6 +9,7 @@ import com.wrapper.spotify.model_objects.specification.PlaylistTrack;
 import com.wrapper.spotify.requests.data.playlists.GetPlaylistsItemsRequest;
 import com.wrapper.spotify.model_objects.specification.AudioFeatures;
 import com.wrapper.spotify.requests.data.tracks.GetAudioFeaturesForTrackRequest;
+import com.wrapper.spotify.requests.data.tracks.GetAudioFeaturesForSeveralTracksRequest;
 import org.apache.hc.core5.http.ParseException;
 import org.json.*;
 
@@ -90,40 +91,32 @@ public class SpotifyAccess {
     return null;
   }
 
-  public ArrayList<String> getPlaylistTrackIds(String playlistId) {
+  public String[] getPlaylistTrackIds(String playlistId) {
     PlaylistTrack[] pltracks = getPlaylist(playlistId);
-    ArrayList<String> toReturn = new ArrayList<String>();
+    ArrayList<String> toCopy = new ArrayList<String>();
 
     for(PlaylistTrack t : pltracks) {
-      toReturn.add(t.getTrack().getId());
+      toCopy.add(t.getTrack().getId());
     }
+
+    String[] toReturn = new String[toCopy.size()];
+    toReturn = toCopy.toArray(toReturn);
 
     return toReturn;
   }
 
   //testing async owo
-  public ArrayList<AudioFeatures> getAudioFeatures(ArrayList<String> plIds) {
+  public AudioFeatures[] getAudioFeatures(String[] plIds) {
     try {
-      ArrayList<CompletableFuture<AudioFeatures>> futures = new ArrayList<CompletableFuture<AudioFeatures>>();
-      ArrayList<AudioFeatures> toReturn = new ArrayList<AudioFeatures>();
-      GetAudioFeaturesForTrackRequest req;
+      GetAudioFeaturesForSeveralTracksRequest getAudioFeaturesForSeveralTracksRequest = spotifyapi
+        .getAudioFeaturesForSeveralTracks(plIds)
+        .build();
 
-      for(String id : plIds) {
-        req = spotifyapi
-          .getAudioFeaturesForTrack(id)
-          .build();
-        futures.add(req.executeAsync());
-      }
-
-      for(CompletableFuture<AudioFeatures> afs : futures) {
-        toReturn.add(afs.join());
-      }
+      final AudioFeatures[] toReturn = getAudioFeaturesForSeveralTracksRequest.execute();
 
       return toReturn;
-    } catch(CompletionException e) {
-      System.out.println("Error: " + e.getCause().getMessage());
-    } catch(CancellationException e) {
-      System.out.println("Async operation cancelled.");
+    } catch(IOException | SpotifyWebApiException | ParseException e) {
+      System.out.println("Error: " + e.getMessage());
     }
     return null;
   }

@@ -6,24 +6,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Hello world!
- *
- */
+import org.knowm.xchart.RadarChart;
+import org.knowm.xchart.SwingWrapper;
+
 public class App 
 {
     public static void main( String[] args )
     {
-        // Scanner sc = new Scanner(System.in);
-        // System.out.println("Spotify Client ID: ");
-        // String id = sc.nextLine();
-        // System.out.println("Spotify Client Secret: ");
-        // String sec = sc.nextLine();
         SpotifyAccess spotifyaccess = new SpotifyAccess("/client.json");
         spotifyaccess.accessToken();
 
-        ArrayList<String> plids = spotifyaccess.getPlaylistTrackIds("75xfeRCvAy3hhYGfjuOl4S");
-        ArrayList<AudioFeatures> features = spotifyaccess.getAudioFeatures(plids);
+        String[] plids = spotifyaccess.getPlaylistTrackIds("4nntO0cFWLeM2vQrIoZq8o");
+        AudioFeatures[] features = spotifyaccess.getAudioFeatures(plids);
 
         HashMap<String, Float> rcData = Analysis.radarChart(features);
         HashMap<String, String> otherData = Analysis.otherFeatures(features);
@@ -37,5 +31,8 @@ public class App
         }
         // System.out.println(spotifyaccess);
 
+        RadarChart rc = Charts.makeChart(rcData);
+        
+        new SwingWrapper(rc).displayChart();
     }
 }

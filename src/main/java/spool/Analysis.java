@@ -11,7 +11,7 @@ public class Analysis {
 
   // compute the radarChart values
   // will compute the averages of: danceability, valence, energy, instrumentalness, acousticness
-  public static HashMap<String, Float> radarChart(ArrayList<AudioFeatures> feet) {
+  public static HashMap<String, Float> radarChart(AudioFeatures[] feet) {
     Float danceabilitySum = 0.0f;
     Float valenceSum = 0.0f;
     Float energySum = 0.0f;
@@ -28,7 +28,7 @@ public class Analysis {
     }
 
     HashMap<String, Float> toReturn = new HashMap<String, Float>();
-    int size = feet.size();
+    int size = feet.length;
 
     toReturn.put("Danceability", danceabilitySum / size);
     toReturn.put("Valence", valenceSum / size);
@@ -41,7 +41,7 @@ public class Analysis {
 
   // analysis of other features (basically the not floats)
 
-  public static HashMap<String, String> otherFeatures(ArrayList<AudioFeatures> feet) {
+  public static HashMap<String, String> otherFeatures(AudioFeatures[] feet) {
     Integer keySum = 0;
     Integer minor = 0;
     Integer major = 0;
@@ -68,7 +68,7 @@ public class Analysis {
       }
     }
 
-    int size = feet.size();
+    int size = feet.length;
     Double avgSecs = durationSum / size / 1000.0;
     String dur = "" + (avgSecs.intValue() / 60) + ":" + String.format("%02.2f", (avgSecs % 60));
     Integer mostCommonTS = 0;
