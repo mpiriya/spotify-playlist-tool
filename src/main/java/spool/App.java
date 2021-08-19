@@ -11,28 +11,28 @@ import org.knowm.xchart.SwingWrapper;
 
 public class App 
 {
-    public static void main( String[] args )
-    {
-        SpotifyAccess spotifyaccess = new SpotifyAccess("/client.json");
-        spotifyaccess.accessToken();
+    // public static void main( String[] args )
+    // {
+    //     SpotifyAccess spotifyaccess = new SpotifyAccess("/client.json");
+    //     spotifyaccess.accessToken();
 
-        String[] plids = spotifyaccess.getPlaylistTrackIds("4nntO0cFWLeM2vQrIoZq8o");
-        AudioFeatures[] features = spotifyaccess.getAudioFeatures(plids);
+    //     String[] plids = spotifyaccess.getPlaylistTrackIds("4nntO0cFWLeM2vQrIoZq8o");
+    //     AudioFeatures[] features = spotifyaccess.getAudioFeatures(plids);
 
-        HashMap<String, Float> rcData = Analysis.radarChart(features);
-        HashMap<String, String> otherData = Analysis.otherFeatures(features);
+    //     HashMap<String, Float> rcData = Analysis.radarChart(features);
+    //     HashMap<String, String> otherData = Analysis.otherFeatures(features);
 
-        for(Map.Entry<String, Float> e : rcData.entrySet()) {
-            System.out.println(e.getKey() + ": " + e.getValue());
-        }
+    //     for(Map.Entry<String, Float> e : rcData.entrySet()) {
+    //         System.out.println(e.getKey() + ": " + e.getValue());
+    //     }
 
-        for(Map.Entry<String, String> e : otherData.entrySet()) {
-            System.out.println(e.getKey() + ": " + e.getValue());
-        }
-        // System.out.println(spotifyaccess);
+    //     for(Map.Entry<String, String> e : otherData.entrySet()) {
+    //         System.out.println(e.getKey() + ": " + e.getValue());
+    //     }
+    //     // System.out.println(spotifyaccess);
 
-        RadarChart rc = Charts.makeChart(rcData);
+    //     RadarChart rc = Charts.makeChart(rcData);
         
-        new SwingWrapper(rc).displayChart();
-    }
+    //     new SwingWrapper(rc).displayChart();
+    // }
 }
